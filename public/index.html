@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Roboto+Slab&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Let's Chat!</h1>
+            <button class="clearChat" id="clearChat">Clear Chat</button>
+        </header>
+        <ul id="chatlog" class="chatlog">
+    
+        </ul>
+        <form action="submit" id="sendMessage">
+            <label for="message" class="sr-only">type your message here:</label>
+            <input type="text" name="message" id="message">
+            <button type="submit">send</button>
+        </form>
+    </div>
+</body>
+<script src="./scripts/script.js"></script>
+</html>
