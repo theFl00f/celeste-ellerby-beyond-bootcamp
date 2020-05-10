@@ -14,5 +14,8 @@
     "jade": "~1.11.0",
     "mongoose": "^5.9.13",
     "morgan": "~1.10.0"
+  },
+  "devDependencies": {
+    "clean-css": "^4.2.3"
   }
 }
