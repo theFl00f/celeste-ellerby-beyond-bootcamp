@@ -1,7 +1,10 @@
 const form = document.querySelector('#sendMessage');
 const userMessage = document.querySelector('#message');
 const chatlog = document.querySelector('#chatlog');
-const clearChatlog = document.querySelector('#clearChat')
+const clearChatlog = document.querySelector('#clearChat');
+const loginButton = document.querySelector('#login');
+const logoutButton = document.querySelector('#logout');
+const userInfoButton = document.querySelector('#info');
 
 
 form.addEventListener('submit', (e) => {
@@ -51,6 +54,26 @@ clearChatlog.addEventListener('click', (e) => {
 
 const savedMessages = localStorage.getItem('messages');
 if (savedMessages) {
-
     chatlog.innerHTML = savedMessages;
+}
+
+const getUser = () => {
+    fetch('/api/data/users')
+        .then((data) => data.json())
+        .then(json => {
+            printUserData(json)
+        })
+}
+
+getUser()
+
+const printUserData = (user) => {
+    console.log(user)
+    const { id, userProfile } = user
+    console.log(id, userProfile.nickname)
+    const htmlToAppend = `welcome, ${userProfile.nickname}`
+    const newUser = document.createElement('p')
+    newUser.setAttribute('id', `${id}`);
+    newUser.innerHTML = htmlToAppend
+    document.querySelector('#welcomeUser').append(newUser)
 }
