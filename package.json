@@ -6,14 +6,27 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "constantinople": "^4.0.1",
     "cookie-parser": "~1.4.5",
+    "cors": "^2.8.5",
     "debug": "~4.1.1",
-    "express": "~4.17.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "express-jwt-authz": "^2.3.1",
+    "express-openid-connect": "^1.0.1",
+    "express-session": "^1.17.1",
     "http-errors": "~1.7.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.8.0",
     "mongoose": "^5.9.13",
-    "morgan": "~1.10.0"
+    "morgan": "~1.10.0",
+    "passport": "^0.4.1",
+    "passport-auth0": "^1.3.2",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "clean-css": "^4.2.3"
