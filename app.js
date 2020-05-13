@@ -67,7 +67,7 @@ const strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
+      process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback" || 'https://beyondbootcampchat.herokuapp.com/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
