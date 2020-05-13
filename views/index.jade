@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  div.NavButtons 
+    if isAuthenticated
+      a(href='/api/data/users')
+        div.NavButton Just dive in! 
+      a(href='/logout')
+        div.NavButton Log out
+    else
+      a(href='/login')
+        div.NavButton Log in
