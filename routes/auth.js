@@ -31,8 +31,8 @@ router.get('/callback', function(req, res, next) {
             if (err) {
                 return next(err)
             }
-            var returnTo = req.session.returnTo;
-            delete req.session.returnTo;
+            // var returnTo = req.session.returnTo;
+            // delete req.session.returnTo;
             res.redirect('/')
         });
     })(req, res, next);

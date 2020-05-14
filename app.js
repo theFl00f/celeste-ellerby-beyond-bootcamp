@@ -26,6 +26,7 @@ var db = mongoose.connection;
 
 db.once('open', _ => {
   console.log('database connected: ', mongoDB)
+  console.log(app.get('env'))
 })
 
 db.on('error', console.error.bind(console, 'mongodb connection error: '))
@@ -59,6 +60,7 @@ if (app.get("env") === "production") {
   session.cookie.secure = true;
 }
 
+
 //passport config
 
 const strategy = new Auth0Strategy(
@@ -67,7 +69,8 @@ const strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      process.env.AUTH0_CALLBACK_URL || 'http://localhost:5000/callback'
+      app.get('env') === 'development' ? 'http://localhost:5000/callback' : process.env.AUTH0_CALLBACK_URL //expression here for if logic
+      // 'http://localhost:5000/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
@@ -123,7 +126,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  //if req.app.get(env) == deployed ? localhost:5000 : env.AUTH0_CALLBACK_URL
   // render the error page
   res.status(err.status || 500);
   res.render('error');
