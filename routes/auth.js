@@ -12,11 +12,17 @@ require('dotenv').config();
 
 //Routes Definitions
 
-router.get('/login', passport.authenticate('auth0', {
-    scope: 'openid email profile'
-}), function(req, res) {
-    res.redirect('/index.html')
+router.get('/login', function(req, res) {
+    console.log('path: ' + req.path)
+    console.log(req.headers)
 })
+
+
+// router.get('/login', passport.authenticate('auth0', {
+//     scope: 'openid email profile'
+// }), function(req, res) {
+//     res.redirect('/')
+// })
 
 router.get('/callback', function(req, res, next) {
     passport.authenticate('auth0', function(err, user, info) {
@@ -59,6 +65,7 @@ router.get('/logout', function(req, res) {
     // res.redirect(logoutURL)
     res.redirect('/')
 })
+
 
 //Module Exports
 
