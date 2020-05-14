@@ -12,11 +12,6 @@ require('dotenv').config();
 
 //Routes Definitions
 
-// router.get('/login', function(req, res) {
-//     console.log('path: ' + req.path)
-//     console.log(req.headers)
-// })
-
 
 router.get('/login', passport.authenticate('auth0', {
     scope: 'openid email profile'
@@ -38,7 +33,7 @@ router.get('/callback', function(req, res, next) {
             }
             var returnTo = req.session.returnTo;
             delete req.session.returnTo;
-            res.redirect('/index.html')
+            res.redirect('/')
         });
     })(req, res, next);
 });
