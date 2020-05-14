@@ -15,7 +15,7 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth')
 
 var app = express();
-var port = process.env.PORT || '3000';
+var port = process.env.PORT || '5000';
 
 //connect to mongodb
 
@@ -128,6 +128,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 module.exports = app;
