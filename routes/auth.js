@@ -14,7 +14,8 @@ require('dotenv').config();
 
 
 router.get('/login', passport.authenticate('auth0', {
-    scope: 'openid email profile'
+    scope: 'openid email profile',
+    session: false
 }), function(req, res) {
     res.redirect('/')
 })
@@ -25,8 +26,8 @@ router.get('/callback', function(req, res, next) {
             return next(err);
         }
         if (!user) {
-            // return res.redirect('/login')
             console.log('no user')
+            return res.redirect('/login')
         }
         req.logIn(user, function(err) {
             if (err) {
