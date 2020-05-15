@@ -69,8 +69,7 @@ const strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      app.get('env') === 'development' ? 'http://localhost:5000/callback' : process.env.AUTH0_CALLBACK_URL //expression here for if logic
-      // 'http://localhost:5000/callback'
+      app.get('env') === 'development' ? 'http://localhost:5000/callback' : process.env.AUTH0_CALLBACK_URL
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
