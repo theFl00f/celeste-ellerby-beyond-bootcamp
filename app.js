@@ -81,6 +81,7 @@ const strategy = new Auth0Strategy(
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('trust proxy', 1)
 
 app.use(cors())
 app.use(logger('dev'));
