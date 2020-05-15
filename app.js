@@ -96,11 +96,11 @@ passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session())
 
-passport.serializeUser((user, done) => {
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
