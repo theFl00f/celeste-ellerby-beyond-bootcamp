@@ -12,35 +12,31 @@ require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth')
+var authRouter = require('./routes/auth');
+var messagesRouter = require('./routes/messages');
+
 
 var app = express();
-var port = process.env.PORT || '5000';
+var port = process.env.PORT || '3000';
 
 //connect to mongodb
-
-var mongoDB = 'mongodb+srv://username:test1234@cluster0-7zldy.mongodb.net/test?retryWrites=true&w=majority'
+var mongoDB = 'mongodb://username:test1234@ds035557.mlab.com:35557/heroku_vvfs5pgw'
+// var mongoDB = 'mongodb+srv://username:test1234@cluster0-7zldy.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 var db = mongoose.connection;
+var messagesCollection = db.collection('messages')
 
 db.once('open', _ => {
   console.log('database connected: ', mongoDB)
   console.log(app.get('env'))
+  // messagesCollection.insertOne({ name: 'hello' })
+  messagesCollection.find({})
 })
 
 db.on('error', console.error.bind(console, 'mongodb connection error: '))
 
-//schemas
 
-var Schema = mongoose.Schema;
-
-var userSchema = new Schema({
-  id: String,
-  userProfile: Object,
-})
-
-var User = mongoose.model('User', userSchema)
 
 
 
@@ -69,7 +65,7 @@ const strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      app.get('env') === 'development' ? 'http://localhost:5000/callback' : process.env.AUTH0_CALLBACK_URL
+      app.get('env') === 'development' ? 'http://localhost:3000/callback' : process.env.AUTH0_CALLBACK_URL
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
@@ -113,6 +109,7 @@ app.use(function(req, res, next) {
 app.use('/api/data', indexRouter);
 app.use('/api/data/users', usersRouter);
 app.use('/', authRouter);
+app.use('/api/data/messages', messagesRouter)
 
 
 
@@ -126,7 +123,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  //if req.app.get(env) == deployed ? localhost:5000 : env.AUTH0_CALLBACK_URL
+  //if req.app.get(env) == deployed ? localhost:3000 : env.AUTH0_CALLBACK_URL
   // render the error page
   res.status(err.status || 500);
   res.render('error');
