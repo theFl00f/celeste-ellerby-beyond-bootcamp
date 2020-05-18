@@ -34,7 +34,7 @@ form.addEventListener('submit', (e) => {
     })
 
     //local storage
-    
+
 //     //create new li element
 //     const newMessage = document.createElement('li');
 //     //change html of li element
@@ -50,10 +50,15 @@ form.addEventListener('submit', (e) => {
 //     </article>
 //     `
 //     chatlog.appendChild(newMessage);
-//     //reset form
-//     userMessage.value = '';
 //     //store to local storage
 //     localStorage.setItem('messages', chatlog.innerHTML);
+
+
+
+
+
+//     //reset form
+    userMessage.value = '';
 
     chatlog.scrollTo({
         top: chatlog.scrollHeight,
@@ -121,3 +126,36 @@ const postMessageToDB = async (id, nickname, message) => {
     })
     return response.json();
 }
+
+const showMessages = () => {
+    return fetch('/api/data/messages')
+        .then(data => {
+            return data.json()
+        })
+        .then(json => {
+        return json
+    })
+}
+
+showMessages().then(res => {
+    console.log(res)
+    res.forEach(message => {
+        console.log(message) 
+        const { id, body, created_at, user } = message
+        //create new li element
+        const newMessage = document.createElement('li');
+        //change html of li element
+        newMessage.innerHTML =  `
+        <article class="userMessage" id="${id}">
+        <p class="userInfo" id="${user.id}">${user.nickname}</p>
+        <p class="messageContents">
+                <span class="time">
+                    ${created_at}
+                </span>
+                ${body}
+            </p>
+        </article>
+        `
+        chatlog.appendChild(newMessage);
+    })
+})
