@@ -5,6 +5,10 @@ const clearChatlog = document.querySelector('#clearChat');
 const loginButton = document.querySelector('#login');
 const logoutButton = document.querySelector('#logout');
 const userInfoButton = document.querySelector('#info');
+const welcomeUser = document.querySelector('#welcomeUser');
+let currentUser;
+let userId = null;
+let userNickname = 'anonymous';
 
 
 form.addEventListener('submit', (e) => {
@@ -18,31 +22,45 @@ form.addEventListener('submit', (e) => {
     //format date
     const paddedSeconds = seconds.padStart(2, '0');
     const paddedMinutes = minutes.padStart(2, '0');
-    const paddedHour = hour.padStart(2, '0')
+    const paddedHour = hour.padStart(2, '0');
+    getUser();
+    if (currentUser) {
+        userId = currentUser.id;
+        userNickname = currentUser.nickname;
+    }
+    console.log(userId, userNickname, paddedHour, paddedMinutes, paddedSeconds, userMessage.value)
+    postMessageToDB(userId, userNickname, userMessage.value).then(data => {
+        console.log(data)
+    })
 
-    //create new li element
-    const newMessage = document.createElement('li');
-    //change html of li element
-    newMessage.innerHTML =  `
-    <p class="messageContents">
-        <span class="time">
-            ${paddedHour}:${paddedMinutes}:${paddedSeconds}
-        </span>
-        ${userMessage.value}
-    </p>
-    `
-    chatlog.appendChild(newMessage);
-    //reset form
-    userMessage.value = '';
-    //store to local storage
-    localStorage.setItem('messages', chatlog.innerHTML);
+    //local storage
+    
+//     //create new li element
+//     const newMessage = document.createElement('li');
+//     //change html of li element
+//     newMessage.innerHTML =  `
+//     <article class="userMessage">
+//     <p class="userInfo" id="${userId}">${userNickname}</p>
+//     <p class="messageContents">
+//             <span class="time">
+//                 ${paddedHour}:${paddedMinutes}:${paddedSeconds}
+//             </span>
+//             ${userMessage.value}
+//         </p>
+//     </article>
+//     `
+//     chatlog.appendChild(newMessage);
+//     //reset form
+//     userMessage.value = '';
+//     //store to local storage
+//     localStorage.setItem('messages', chatlog.innerHTML);
 
     chatlog.scrollTo({
         top: chatlog.scrollHeight,
         left: 0,
         behavior: 'smooth'
     })
-}, false)
+})
 
 
 clearChatlog.addEventListener('click', (e) => {
@@ -62,18 +80,44 @@ const getUser = () => {
         .then((data) => data.json())
         .then(json => {
             printUserData(json)
+        }).catch(err => {
+            console.log(err)
+            userId = null;
+            userNickname = 'anonymous'
         })
 }
 
 getUser()
 
+
 const printUserData = (user) => {
-    console.log(user)
-    const { id, userProfile } = user
-    console.log(id, userProfile.nickname)
-    const htmlToAppend = `welcome, ${userProfile.nickname}`
-    const newUser = document.createElement('p')
-    newUser.setAttribute('id', `${id}`);
-    newUser.innerHTML = htmlToAppend
-    document.querySelector('#welcomeUser').append(newUser)
+    
+    if (!welcomeUser.hasChildNodes()) {
+        const { id, userProfile } = user
+        currentUser = userProfile;
+        console.log(user)
+        console.log(id, userProfile.nickname)
+        const htmlToAppend = `welcome, ${userProfile.nickname}`
+        const newUser = document.createElement('p')
+        newUser.setAttribute('id', `${id}`);
+        newUser.innerHTML = htmlToAppend
+        welcomeUser.append(newUser)
+    }
+}
+
+const postMessageToDB = async (id, nickname, message) => {
+    const response = await fetch('/api/data/messages', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            body: message,
+            user: {
+                id,
+                nickname
+            }
+        })
+    })
+    return response.json();
 }

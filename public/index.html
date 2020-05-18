@@ -28,7 +28,7 @@
         <ul id="chatlog" class="chatlog">
     
         </ul>
-        <form action="submit" id="sendMessage">
+        <form action="/api/data/messages" id="sendMessage" method="POST">
             <label for="message" class="sr-only">type your message here:</label>
             <input type="text" name="message" id="message">
             <button type="submit">send</button>
