@@ -20,7 +20,6 @@ var app = express();
 var http = require('http').createServer(app)
 var io = require('socket.io')(http)
 var port = app.get('env') === 'development' ? 5000 : process.env.PORT;
-var host = location.origin;
 
 
 //connect to mongodb
