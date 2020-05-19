@@ -19,7 +19,9 @@ var messagesRouter = require('./routes/messages');
 var app = express();
 var http = require('http').createServer(app)
 var io = require('socket.io')(http)
-var port = app.get('env') === 'development' ? 3000 : process.env.PORT;
+var port = app.get('env') === 'development' ? 5000 : process.env.PORT;
+var host = location.origin;
+
 
 //connect to mongodb
 var mongoDB = 'mongodb://username:test1234@ds035557.mlab.com:35557/heroku_vvfs5pgw'
@@ -83,7 +85,7 @@ const strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-    app.get('env') === 'development' ? 'http://localhost:3000/callback' : process.env.AUTH0_CALLBACK_URL
+    app.get('env') === 'development' ? 'http://localhost:5000/callback' : process.env.AUTH0_CALLBACK_URL
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
