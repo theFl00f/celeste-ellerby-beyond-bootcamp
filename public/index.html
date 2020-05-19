@@ -31,9 +31,15 @@
         <form action="/api/data/messages" id="sendMessage" method="POST">
             <label for="message" class="sr-only">type your message here:</label>
             <input type="text" name="message" id="message">
-            <button type="submit">send</button>
+            <button type="submit"></button>send</button>
         </form>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        // const form = document.querySelector('#sendMessage');
+        // const msg = document.querySelector('#message').value;
+    </script>
 </body>
 <script src="./scripts/script.js"></script>
 </html>

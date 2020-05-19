@@ -17,6 +17,8 @@ var messagesRouter = require('./routes/messages');
 
 
 var app = express();
+var http = require('http').createServer(app)
+var io = require('socket.io')(http)
 var port = process.env.PORT || '3000';
 
 //connect to mongodb
@@ -37,6 +39,22 @@ db.once('open', _ => {
 db.on('error', console.error.bind(console, 'mongodb connection error: '))
 
 
+//socket.io connection
+
+io.on('connection', function (socket) {
+  console.log('a user connected')
+  socket.on('disconnect', function() {
+    console.log('a user disconnected')
+  })
+
+  socket.on('msg', (data) => {
+    io.sockets.emit('newmsg', data)
+  })
+})
+
+http.listen(port, function() {
+  console.log('now listening on', port)
+})
 
 
 
@@ -65,26 +83,25 @@ const strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      app.get('env') === 'development' ? 'http://localhost:3000/callback' : process.env.AUTH0_CALLBACK_URL
+    app.get('env') === 'development' ? 'http://localhost:3000/callback' : process.env.AUTH0_CALLBACK_URL
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
   }
-);
-
-
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.set('trust proxy', 1)
-
-app.use(cors())
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  );
+  
+  
+  // view engine setup
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
+  app.set('trust proxy', 1)
+  
+  app.use(cors())
+  app.use(logger('dev'));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(expressSession(session))
 

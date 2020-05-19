@@ -11,6 +11,19 @@ let userId = null;
 let userNickname = 'anonymous';
 
 
+const socketSendMessage = () => {
+    const msg = userMessage.value;
+    if (msg) {
+        socket.emit('msg', {message: msg})
+    }
+    console.log(msg)
+    printMessages()
+}
+
+
+
+
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (userMessage.value.length < 1) return;
@@ -28,7 +41,6 @@ form.addEventListener('submit', (e) => {
         userId = currentUser.id;
         userNickname = currentUser.nickname;
     }
-    console.log(userId, userNickname, paddedHour, paddedMinutes, paddedSeconds, userMessage.value)
     postMessageToDB(userId, userNickname, userMessage.value).then(data => {
         console.log(data)
     })
@@ -55,16 +67,13 @@ form.addEventListener('submit', (e) => {
 
 
 
+    socketSendMessage();
 
 
 //     //reset form
     userMessage.value = '';
 
-    chatlog.scrollTo({
-        top: chatlog.scrollHeight,
-        left: 0,
-        behavior: 'smooth'
-    })
+
 })
 
 
@@ -127,7 +136,7 @@ const postMessageToDB = async (id, nickname, message) => {
     return response.json();
 }
 
-const showMessages = () => {
+const getMessages = () => {
     return fetch('/api/data/messages')
         .then(data => {
             return data.json()
@@ -137,25 +146,39 @@ const showMessages = () => {
     })
 }
 
-showMessages().then(res => {
-    console.log(res)
-    res.forEach(message => {
-        console.log(message) 
-        const { id, body, created_at, user } = message
-        //create new li element
-        const newMessage = document.createElement('li');
-        //change html of li element
-        newMessage.innerHTML =  `
-        <article class="userMessage" id="${id}">
-        <p class="userInfo" id="${user.id}">${user.nickname}</p>
-        <p class="messageContents">
-                <span class="time">
-                    ${created_at}
-                </span>
-                ${body}
-            </p>
-        </article>
-        `
-        chatlog.appendChild(newMessage);
+const printMessages = () => {
+    getMessages().then(res => {
+        chatlog.innerHTML = '';
+        res.forEach(message => {
+            console.log(message) 
+            const { id, body, created_at, user } = message
+            //create new li element
+            const newMessage = document.createElement('li');
+            //change html of li element
+            newMessage.innerHTML =  `
+            <article class="userMessage" id="${id}">
+            <p class="userInfo" id="${user.id}">${user.nickname}</p>
+            <p class="messageContents">
+                    <span class="time">
+                        ${created_at}
+                    </span>
+                    ${body}
+                </p>
+            </article>
+            `
+            chatlog.appendChild(newMessage);
+            chatlog.scrollTo({
+                top: chatlog.scrollHeight,
+                left: 0,
+                behavior: 'auto'
+            })
+        })
     })
+}
+
+socket.on('newmsg', msg => {
+    console.log('socket listener', msg)
+    printMessages()
 })
+
+printMessages();

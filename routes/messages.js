@@ -10,6 +10,7 @@ router.post('/', async (req, res) => {
         var message = new Message(req.body);
         var result = await message.save();
         res.send(result)
+        
     } catch (err) {
         res.status(500).send(err)
     }
