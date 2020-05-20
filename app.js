@@ -126,9 +126,8 @@ app.use(function(req, res, next) {
 
 app.use('/api/data', indexRouter);
 app.use('/api/data/users', usersRouter);
-app.use('/', authRouter);
 app.use('/api/data/messages', messagesRouter)
-
+app.use('/', authRouter);
 
 
 // catch 404 and forward to error handler

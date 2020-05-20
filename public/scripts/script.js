@@ -10,6 +10,7 @@ let currentUser;
 let userId = null;
 let userNickname = 'anonymous';
 
+const socket = io();
 
 const socketSendMessage = () => {
     const msg = userMessage.value;
@@ -23,19 +24,12 @@ const socketSendMessage = () => {
 
 
 
+//listen for new messages
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (userMessage.value.length < 1) return;
-    //get date
-    const date = new Date();
-    const hour = date.getHours().toString();
-    const minutes = date.getMinutes().toString();
-    const seconds = date.getSeconds().toString();
-    //format date
-    const paddedSeconds = seconds.padStart(2, '0');
-    const paddedMinutes = minutes.padStart(2, '0');
-    const paddedHour = hour.padStart(2, '0');
+
     getUser();
     if (currentUser) {
         userId = currentUser.id;
@@ -45,28 +39,6 @@ form.addEventListener('submit', (e) => {
         console.log(data)
     })
 
-    //local storage
-
-//     //create new li element
-//     const newMessage = document.createElement('li');
-//     //change html of li element
-//     newMessage.innerHTML =  `
-//     <article class="userMessage">
-//     <p class="userInfo" id="${userId}">${userNickname}</p>
-//     <p class="messageContents">
-//             <span class="time">
-//                 ${paddedHour}:${paddedMinutes}:${paddedSeconds}
-//             </span>
-//             ${userMessage.value}
-//         </p>
-//     </article>
-//     `
-//     chatlog.appendChild(newMessage);
-//     //store to local storage
-//     localStorage.setItem('messages', chatlog.innerHTML);
-
-
-
     socketSendMessage();
 
 
@@ -74,13 +46,6 @@ form.addEventListener('submit', (e) => {
     userMessage.value = '';
 
 
-})
-
-
-clearChatlog.addEventListener('click', (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    location.reload();
 })
 
 
@@ -150,21 +115,22 @@ const printMessages = () => {
     getMessages().then(res => {
         chatlog.innerHTML = '';
         res.forEach(message => {
-            console.log(message) 
-            const { id, body, created_at, user } = message
+            const { _id, body, created_at, user } = message
+            console.log(message)
             //create new li element
             const newMessage = document.createElement('li');
             //change html of li element
             newMessage.innerHTML =  `
-            <article class="userMessage" id="${id}">
-            <p class="userInfo" id="${user.id}">${user.nickname}</p>
-            <p class="messageContents">
+            <form class="userMessage" id="${_id}" method="GET">
+                <button type ="submit">x</button>
+                <p class="userInfo" id="${user.id}">${user.nickname}</p>
+                <p class="messageContents">
                     <span class="time">
                         ${created_at}
                     </span>
                     ${body}
                 </p>
-            </article>
+            </form>
             `
             chatlog.appendChild(newMessage);
             chatlog.scrollTo({
