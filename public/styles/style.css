@@ -24,7 +24,7 @@ blockquote, q {
 }
 
 blockquote:after, blockquote:before, q:after, q:before {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -42,6 +42,7 @@ input[type=search] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
 
@@ -95,7 +96,7 @@ form {
 fieldset {
   border: 1px solid silver;
   margin: 0 2px;
-  padding: .35em .625em .75em;
+  padding: 0.35em 0.625em 0.75em;
 }
 
 legend {
@@ -128,13 +129,13 @@ button[disabled], html input[disabled] {
 }
 
 input[type=checkbox], input[type=radio] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0;
 }
 
 input[type=search] {
   -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
@@ -187,22 +188,23 @@ textarea {
 }
 
 .chromeframe {
-  margin: .2em 0;
+  margin: 0.2em 0;
   background: #ccc;
   color: #000;
-  padding: .2em 0;
+  padding: 0.2em 0;
 }
 
 .clearfix:after {
   visibility: hidden;
   display: block;
   font-size: 0;
-  content: '';
+  content: "";
   clear: both;
   height: 0;
 }
 
 * {
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -215,8 +217,7 @@ textarea {
   border: 0;
   padding: 0;
   white-space: nowrap;
-  -webkit-clip-path: inset(100%);
-          clip-path: inset(100%);
+  clip-path: inset(100%);
   clip: rect(0 0 0);
   overflow: hidden;
 }
@@ -266,37 +267,26 @@ body {
   background-color: #FFFFEA;
   height: 90vh;
 }
-
 body .wrapper {
   margin-top: 5%;
   margin-bottom: 5%;
   background-color: #00CECB;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 body header {
-  -ms-flex-preferred-size: 5%;
-      flex-basis: 5%;
+  flex-basis: 5%;
   text-align: center;
   padding: 1.5rem 0;
 }
-
 body .chatlog {
   background-color: #D8D8D8;
-  -ms-flex-preferred-size: 80%;
-      flex-basis: 80%;
+  flex-basis: 80%;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #FF5E5B #003049;
 }
-
 body li {
   background-color: #FF5E5B;
   margin: 1.5rem 0 1.5rem 1.5rem;
@@ -304,35 +294,25 @@ body li {
   width: 40%;
   border-radius: 1.25rem;
 }
-
-body form {
-  -ms-flex-preferred-size: 15%;
-      flex-basis: 15%;
-  display: -webkit-box;
-  display: -ms-flexbox;
+body form.sendMessage {
+  flex-basis: 15%;
   display: flex;
   padding: 2% 0 5%;
   background-color: #003049;
 }
-
 body input {
-  -ms-flex-preferred-size: 80%;
-      flex-basis: 80%;
+  flex-basis: 80%;
   border: none;
   padding: 3rem;
 }
-
 body button {
-  -ms-flex-preferred-size: 20%;
-      flex-basis: 20%;
+  flex-basis: 20%;
   background-color: #FFED66;
   border: none;
 }
-
 body header {
   position: relative;
 }
-
 body .clearChat {
   position: absolute;
   top: 0;
@@ -340,3 +320,4 @@ body .clearChat {
   right: 0;
   width: 15%;
 }
+
