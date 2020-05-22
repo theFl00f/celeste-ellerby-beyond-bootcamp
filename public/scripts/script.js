@@ -119,8 +119,8 @@ const printMessages = () => {
             const newMessage = document.createElement('li');
             //change html of li element
             newMessage.innerHTML =  `
-            <form class="userMessage" id="${_id}" method="GET">
-                <button type ="submit">x</button>
+            <article class="userMessage">
+                <a href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</a>
                 <p class="userInfo" id="${user.id}">${user.nickname}</p>
                 <p class="messageContents">
                     <span class="time">
@@ -128,7 +128,7 @@ const printMessages = () => {
                     </span>
                     ${body}
                 </p>
-            </form>
+            </article>
             `
             //if p.userinfo id is equal to null or is not equal to the div.welcomeUser child's id, delete button
             //or, only add button if above conditions are met
@@ -141,13 +141,15 @@ const printMessages = () => {
             
         })
     })
-        .then(() => {
+    .then(() => {
             // delete message
-            const messageArray = [...document.getElementsByClassName('userMessage')];
+            const messageArray = [...document.getElementsByClassName('deleteMessage')];
             messageArray.forEach(message => {
-                message.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    console.log(this)
+                message.addEventListener('click', function (e) {
+                    // e.preventDefault();
+                    fetch(`/api/data/messages/${this.id}`)
+                        .then(res => res.json())
+                        .then(data => console.log(data))
                 })
             })
 
