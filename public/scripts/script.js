@@ -118,27 +118,41 @@ const printMessages = () => {
             //create new li element
             const newMessage = document.createElement('li');
             //change html of li element
-            newMessage.innerHTML =  `
-            <article class="userMessage">
-                <a href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</a>
-                <p class="userInfo" id="${user.id}">${user.nickname}</p>
-                <p class="messageContents">
-                    <span class="time">
-                        ${created_at}
-                    </span>
-                    ${body}
-                </p>
-            </article>
-            `
-            //if p.userinfo id is equal to null or is not equal to the div.welcomeUser child's id, delete button
-            //or, only add button if above conditions are met
+            //only add button if p.userinfo id is equal to null or is not equal to the div.welcomeUser child's id
+            if (user.id !== null && currentUser && user.id == currentUser.id) {
+                //matches
+                newMessage.innerHTML =  `
+                <article class="userMessage">
+                    <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</button>
+                    <p class="userInfo" id="${user.id}">${user.nickname}</p>
+                    <p class="messageContents">
+                        <span class="time">
+                            ${created_at}
+                        </span>
+                        ${body}
+                    </p>
+                </article>
+                `
+            } else {
+                //does not match
+                newMessage.innerHTML =  `
+                <article class="userMessage">
+                    <p class="userInfo" id="${user.id}">${user.nickname}</p>
+                    <p class="messageContents">
+                        <span class="time">
+                            ${created_at}
+                        </span>
+                        ${body}
+                    </p>
+                </article>
+                `
+            }
             chatlog.appendChild(newMessage);
             chatlog.scrollTo({
                 top: chatlog.scrollHeight,
                 left: 0,
                 behavior: 'auto'
             })
-            
         })
     })
     .then(() => {
@@ -146,10 +160,14 @@ const printMessages = () => {
             const messageArray = [...document.getElementsByClassName('deleteMessage')];
             messageArray.forEach(message => {
                 message.addEventListener('click', function (e) {
-                    // e.preventDefault();
-                    fetch(`/api/data/messages/${this.id}`)
-                        .then(res => res.json())
-                        .then(data => console.log(data))
+                    e.preventDefault();
+                    fetch(`/api/data/messages/${this.id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(res => res.json())
+                    .then(() => {
+                        printMessages();
+                    })
                 })
             })
 

@@ -31,14 +31,25 @@ router.get('/', async(req, res, next) => {
     }
 })
 
-router.get('/:id', async function (req, res) {
+router.delete('/:id', async function (req, res) {
     console.log(req.params.id)
     try {
-        var message = await Message.find({ _id: req.params.id }).exec();
+        var message = await Message.deleteOne({ _id: req.params.id }).exec();
         console.log(message)
         res.send(message)
     } catch (err) {
-        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
+router.get('/:id', async function (req, res) {
+    console.log(req.params.id)
+    try {
+        var message = await Message.findOne({ _id: req.params.id }).exec();
+        console.log(message)
+        res.send(message)
+    } catch (err) {
+        res.status(500).send(err)
     }
 })
 
