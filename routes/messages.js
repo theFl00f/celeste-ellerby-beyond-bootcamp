@@ -22,12 +22,23 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/', async(req, res) => {
+router.get('/', async(req, res, next) => {
     try {
         var result = await Message.find().exec();
         res.send(result)
     } catch (err) {
         res.status(500).send(err);
+    }
+})
+
+router.get('/:id', async function (req, res) {
+    console.log(req.params.id)
+    try {
+        var message = await Message.find({ _id: req.params.id }).exec();
+        console.log(message)
+        res.send(message)
+    } catch (err) {
+        console.log(err)
     }
 })
 

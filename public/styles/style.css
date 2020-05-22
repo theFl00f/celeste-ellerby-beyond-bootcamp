@@ -265,11 +265,11 @@ button {
 
 body {
   background-color: #FFFFEA;
-  height: 90vh;
+  height: 100vh;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 body .wrapper {
-  margin-top: 5%;
-  margin-bottom: 5%;
   background-color: #00CECB;
   height: 100%;
   display: flex;
@@ -305,7 +305,7 @@ body input {
   border: none;
   padding: 3rem;
 }
-body button {
+body button, body .deleteMessage {
   flex-basis: 20%;
   background-color: #FFED66;
   border: none;
@@ -320,4 +320,3 @@ body .clearChat {
   right: 0;
   width: 15%;
 }
-

@@ -1,9 +1,9 @@
 body {
     background-color: $white;
-    height: 90vh;
+    height: 100vh;
+    padding-top: 5%;
+    padding-bottom: 5%;
     .wrapper {
-        margin-top: 5%;
-        margin-bottom: 5%;
         background-color: $secondaryColor;
         height: 100%;
         display: flex;
@@ -39,7 +39,7 @@ body {
         border: none;
         padding: 3rem;
     }
-    button {
+    button, .deleteMessage {
         flex-basis: 20%;
         background-color: $accentColor;
         border: none;
