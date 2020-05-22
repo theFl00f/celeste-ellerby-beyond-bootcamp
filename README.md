@@ -17,10 +17,9 @@ MongoDB for database, mongoose, express.js, node.js, socket.io, dart sass and ja
 * Realtime chat
 ## Upcoming Features
 ### in progress
-* delete messages by id
-* only show buttons if you are the authenticated user
 * if you are the sender of the message, show on right side
+* number of users currently online
 ### the backburner
+* allow anonymous users to set their public chat name
 * string method to format date and time
 * format messages so that they get grouped with similar timed messages, ie space between days, line break for between weeks
-* if user is anonymous, give them a cute lil icon
