@@ -42,10 +42,16 @@ db.on('error', console.error.bind(console, 'mongodb connection error: '))
 
 //socket.io connection
 
+var onlineUsers = 0;
+
 io.on('connection', function (socket) {
-  console.log('a user connected')
+  onlineUsers++
+  io.sockets.emit('counter', { onlineUsers })
+  console.log('a user connected. ', onlineUsers);
   socket.on('disconnect', function() {
-    console.log('a user disconnected')
+    onlineUsers--
+    io.sockets.emit('counter', { onlineUsers })
+    console.log('a user disconnected. ', onlineUsers)
   })
 
   socket.on('msg', (data) => {
@@ -124,10 +130,11 @@ app.use(function(req, res, next) {
 })
 
 
-app.use('/api/data', indexRouter);
+// app.use('/api/data', indexRouter);
 app.use('/api/data/users', usersRouter);
 app.use('/api/data/messages', messagesRouter)
 app.use('/', authRouter);
+
 
 
 // catch 404 and forward to error handler

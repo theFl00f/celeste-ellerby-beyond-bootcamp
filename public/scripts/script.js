@@ -7,6 +7,7 @@ const loginButton = document.querySelector('#login');
 const logoutButton = document.querySelector('#logout');
 const userInfoButton = document.querySelector('#info');
 const welcomeUser = document.querySelector('#welcomeUser');
+const onlineUsers = document.querySelector('#onlineUsers')
 let currentUser;
 let userId = null;
 let userNickname = 'anonymous';
@@ -21,6 +22,10 @@ const socketSendMessage = () => {
     console.log(msg)
     printMessages()
 }
+
+socket.on('counter', (data) => {
+    onlineUsers.innerHTML = data.onlineUsers
+})
 
 
 
