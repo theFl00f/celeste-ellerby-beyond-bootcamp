@@ -263,6 +263,10 @@ button {
   font-size: 1.8rem;
 }
 
+.deleteMessage {
+  font-size: 1.4rem;
+}
+
 body {
   background-color: #FFFFEA;
   height: 100vh;
@@ -292,7 +296,8 @@ body li {
   margin: 1.5rem 0 1.5rem 1.5rem;
   padding: 1rem;
   width: 40%;
-  border-radius: 1.25rem;
+  border-radius: 1rem;
+  position: relative;
 }
 body form.sendMessage {
   flex-basis: 15%;
@@ -309,6 +314,21 @@ body button, body .deleteMessage {
   flex-basis: 20%;
   background-color: #FFED66;
   border: none;
+}
+body .deleteMessage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-height: 2.5rem;
+  min-height: 2.5rem;
+  max-width: 2.5rem;
+  min-width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0rem;
+  border-bottom-right-radius: 0rem;
 }
 body header {
   position: relative;
