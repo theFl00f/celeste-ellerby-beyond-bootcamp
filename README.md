@@ -15,10 +15,11 @@ MongoDB for database, mongoose, express.js, node.js, socket.io, dart sass and ja
 * Auth0 authentication
 * Anonymous and authenticated messaging
 * Realtime chat
+* number of users currently online
+* delete messages (for authenticated users only)
 ## Upcoming Features
 ### in progress
 * if you are the sender of the message, show on right side
-* number of users currently online
 ### the backburner
 * allow anonymous users to set their public chat name
 * string method to format date and time
