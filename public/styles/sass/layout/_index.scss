@@ -4,6 +4,8 @@ body {
     padding-top: 5%;
     padding-bottom: 5%;
     .wrapper {
+        border-radius: 1rem;
+        overflow: hidden;
         background-color: $secondaryColor;
         height: 100%;
         display: flex;
@@ -23,9 +25,8 @@ body {
     }
     li {
         background-color: $primaryColor;
-        margin: 1.5rem 0 1.5rem 1.5rem;
+        margin: 1.5rem;
         padding: 1rem;
-        width: 40%;
         border-radius: 1rem;
         position: relative;
     }
@@ -63,11 +64,34 @@ body {
     header {
         position: relative;
     }
-    .clearChat {
+    article {
+        @media (max-width: 400px) {
+            position: relative;
+        }
+    }
+    .userInfo {
+        letter-spacing: .1rem;
+        position: relative;
+        @media (max-width: 400px) {
+            padding: 1.25rem 0 .33rem;
+            position: static;
+        }
+    }
+    .time {
+        text-align: right;
         position: absolute;
-        top: 0;
-        bottom: 0;
         right: 0;
-        width: 15%;
+        @media (max-width: 400px) {
+            left: 0;
+            top: 0;
+            right: unset;
+            text-align: left;
+        }
+    }
+    .date {
+        margin-right: 2rem;
+        @media (max-width: 450px) {
+            margin-right: .5rem;
+        }
     }
 }

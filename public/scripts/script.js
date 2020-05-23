@@ -122,6 +122,23 @@ const printMessages = () => {
             const { _id, body, created_at, user } = message
             //create new li element
             const newMessage = document.createElement('li');
+
+            const newDate = new Date(created_at);
+            console.log(newDate)
+            const dateString = newDate.toString().slice(0, 15)
+            const timeArray = newDate.toString().slice(16, -33).split(':')
+            const hours = parseInt(timeArray[0]);
+            console.log(hours)
+            let amPm;
+            if (hours >= 12) {
+                amPm = 'pm'
+            } else {
+                amPm = 'am'
+            }
+            // console.log(hours)
+            const formattedTime = `${timeArray[0]}:${timeArray[1]}`
+            console.log(formattedTime)
+
             //change html of li element
             //only add button if p.userinfo id is equal to null or is not equal to the div.welcomeUser child's id
             if (user.id !== null && currentUser && user.id == currentUser.id) {
@@ -129,11 +146,13 @@ const printMessages = () => {
                 newMessage.innerHTML =  `
                 <article class="userMessage">
                     <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</button>
-                    <p class="userInfo" id="${user.id}">${user.nickname}</p>
-                    <p class="messageContents">
+                    <p class="userInfo" id="${user.id}">${user.nickname}
                         <span class="time">
-                            ${created_at}
+                            <span class="date">${dateString} </span>
+                            ${formattedTime}
                         </span>
+                    </p>
+                    <p class="messageContents">
                         ${body}
                     </p>
                 </article>
@@ -142,11 +161,13 @@ const printMessages = () => {
                 //does not match
                 newMessage.innerHTML =  `
                 <article class="userMessage">
-                    <p class="userInfo" id="${user.id}">${user.nickname}</p>
-                    <p class="messageContents">
+                    <p class="userInfo" id="${user.id}">${user.nickname}
                         <span class="time">
-                            ${created_at}
+                            <span class="date">${dateString} </span>
+                            ${formattedTime}
                         </span>
+                    </p>
+                    <p class="messageContents">
                         ${body}
                     </p>
                 </article>

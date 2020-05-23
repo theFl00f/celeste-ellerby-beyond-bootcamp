@@ -1,14 +1,15 @@
-body {
+body, nav a {
     color: $black;
     font-family: $bodyFont;
     font-size: 1.5rem;
+    text-decoration: none;
 }
 
 h1 {
     font-size: 4rem;
 }
 
-span, h1, button {
+span, h1, button, nav, nav a {
     font-family: $accentFont;
 }
 
@@ -21,5 +22,5 @@ button {
 }
 
 .deleteMessage {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }

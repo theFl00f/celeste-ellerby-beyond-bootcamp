@@ -241,17 +241,18 @@ html {
   margin: 0 auto;
 }
 
-body {
+body, nav a {
   color: #003049;
   font-family: "Roboto Slab", serif;
   font-size: 1.5rem;
+  text-decoration: none;
 }
 
 h1 {
   font-size: 4rem;
 }
 
-span, h1, button {
+span, h1, button, nav, nav a {
   font-family: "Bungee Inline", cursive;
 }
 
@@ -264,7 +265,7 @@ button {
 }
 
 .deleteMessage {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 body {
@@ -274,6 +275,8 @@ body {
   padding-bottom: 5%;
 }
 body .wrapper {
+  border-radius: 1rem;
+  overflow: hidden;
   background-color: #00CECB;
   height: 100%;
   display: flex;
@@ -293,9 +296,8 @@ body .chatlog {
 }
 body li {
   background-color: #FF5E5B;
-  margin: 1.5rem 0 1.5rem 1.5rem;
+  margin: 1.5rem;
   padding: 1rem;
-  width: 40%;
   border-radius: 1rem;
   position: relative;
 }
@@ -333,10 +335,39 @@ body .deleteMessage {
 body header {
   position: relative;
 }
-body .clearChat {
+@media (max-width: 400px) {
+  body article {
+    position: relative;
+  }
+}
+body .userInfo {
+  letter-spacing: 0.1rem;
+  position: relative;
+}
+@media (max-width: 400px) {
+  body .userInfo {
+    padding: 1.25rem 0 0.33rem;
+    position: static;
+  }
+}
+body .time {
+  text-align: right;
   position: absolute;
-  top: 0;
-  bottom: 0;
   right: 0;
-  width: 15%;
+}
+@media (max-width: 400px) {
+  body .time {
+    left: 0;
+    top: 0;
+    right: unset;
+    text-align: left;
+  }
+}
+body .date {
+  margin-right: 2rem;
+}
+@media (max-width: 450px) {
+  body .date {
+    margin-right: 0.5rem;
+  }
 }
