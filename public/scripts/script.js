@@ -118,17 +118,15 @@ const printMessages = () => {
     getMessages()
         .then(res => {
         chatlog.innerHTML = '';
-        res.forEach(message => {
+        console.log(res)
+        res.reverse().forEach(message => {
             const { _id, body, created_at, user } = message
             //create new li element
             const newMessage = document.createElement('li');
-
             const newDate = new Date(created_at);
-            console.log(newDate)
             const dateString = newDate.toString().slice(0, 15)
             const timeArray = newDate.toString().slice(16, -33).split(':')
             const hours = parseInt(timeArray[0]);
-            console.log(hours)
             let amPm;
             if (hours >= 12) {
                 amPm = 'pm'
@@ -137,8 +135,6 @@ const printMessages = () => {
             }
             // console.log(hours)
             const formattedTime = `${timeArray[0]}:${timeArray[1]}`
-            console.log(formattedTime)
-
             //change html of li element
             //only add button if p.userinfo id is equal to null or is not equal to the div.welcomeUser child's id
             if (user.id !== null && currentUser && user.id == currentUser.id) {
