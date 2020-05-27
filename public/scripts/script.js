@@ -119,7 +119,7 @@ const printMessages = () => {
         .then(res => {
         chatlog.innerHTML = '';
         console.log(res)
-        res.reverse().forEach(message => {
+        res.forEach(message => {
             const { _id, body, created_at, user } = message
             //create new li element
             const newMessage = document.createElement('li');
