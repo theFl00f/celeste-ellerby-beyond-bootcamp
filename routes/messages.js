@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async(req, res, next) => {
     try {
-        var result = await Message.find().exec();
+        var result = await Message.find().sort('date').exec();
         res.send(result)
     } catch (err) {
         res.status(500).send(err);
