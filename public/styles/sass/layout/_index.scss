@@ -1,97 +1,97 @@
 body {
     background-color: $white;
     height: 100vh;
-    padding-top: 5%;
     padding-bottom: 5%;
-    .wrapper {
-        border-radius: 1rem;
-        overflow: hidden;
-        background-color: $secondaryColor;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    header {
-        flex-basis: 5%;
-        text-align: center;
-        padding: 1.5rem 0;
-    }
-    .chatlog {
-        background-color: $grey;
-        flex-basis: 80%;
-        overflow-y: scroll;
-        scrollbar-width: thin;
-        scrollbar-color: $primaryColor $black;
-    }
-    li {
-        background-color: $primaryColor;
-        margin: 1.5rem;
-        padding: 1rem;
-        border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.wrapper {
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 79.75%;
+}
+header {
+    flex-basis: 20.25%;
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: $secondaryColor;
+    position: relative;
+    border-bottom: 4px solid $black;
+}
+.chatlog {
+    background-color: $grey;
+    flex-basis: 80%;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: $primaryColor $black;
+}
+li {
+    background-color: $primaryColor;
+    margin: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    position: relative;
+}
+form.sendMessage {
+    flex-basis: 15%;
+    display: flex;
+    padding: 2% 0 5%;
+    background-color: $black;
+}
+input {
+    flex-basis: 80%;
+    border: none;
+    padding: 3rem;
+}
+button, .deleteMessage {
+    flex-basis: 20%;
+    background-color: $accentColor;
+    border: none;
+}
+.deleteMessage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-height: 2.5rem;
+    min-height: 2.5rem;
+    max-width: 2.5rem;
+    min-width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+    border-top-left-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+}
+article {
+    @media (max-width: 400px) {
         position: relative;
     }
-    form.sendMessage {
-        flex-basis: 15%;
-        display: flex;
-        padding: 2% 0 5%;
-        background-color: $black;
+}
+.userInfo {
+    letter-spacing: .1rem;
+    position: relative;
+    @media (max-width: 400px) {
+        padding: 1.25rem 0 .33rem;
+        position: static;
     }
-    input {
-        flex-basis: 80%;
-        border: none;
-        padding: 3rem;
-    }
-    button, .deleteMessage {
-        flex-basis: 20%;
-        background-color: $accentColor;
-        border: none;
-    }
-    .deleteMessage {
-        position: absolute;
+}
+.time {
+    text-align: right;
+    position: absolute;
+    right: 0;
+    @media (max-width: 400px) {
+        left: 0;
         top: 0;
-        right: 0;
-        max-height: 2.5rem;
-        min-height: 2.5rem;
-        max-width: 2.5rem;
-        min-width: 2.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: .5rem;
-        border-top-left-radius: 0rem;
-        border-bottom-right-radius: 0rem;
+        right: unset;
+        text-align: left;
     }
-    header {
-        position: relative;
-    }
-    article {
-        @media (max-width: 400px) {
-            position: relative;
-        }
-    }
-    .userInfo {
-        letter-spacing: .1rem;
-        position: relative;
-        @media (max-width: 400px) {
-            padding: 1.25rem 0 .33rem;
-            position: static;
-        }
-    }
-    .time {
-        text-align: right;
-        position: absolute;
-        right: 0;
-        @media (max-width: 400px) {
-            left: 0;
-            top: 0;
-            right: unset;
-            text-align: left;
-        }
-    }
-    .date {
-        margin-right: 2rem;
-        @media (max-width: 450px) {
-            margin-right: .5rem;
-        }
+}
+.date {
+    margin-right: 2rem;
+    @media (max-width: 450px) {
+        margin-right: .5rem;
     }
 }

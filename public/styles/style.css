@@ -271,53 +271,64 @@ button {
 body {
   background-color: #FFFFEA;
   height: 100vh;
-  padding-top: 5%;
   padding-bottom: 5%;
-}
-body .wrapper {
-  border-radius: 1rem;
-  overflow: hidden;
-  background-color: #00CECB;
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
-body header {
-  flex-basis: 5%;
+
+.wrapper {
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 79.75%;
+}
+
+header {
+  flex-basis: 20.25%;
   text-align: center;
   padding: 1.5rem 0;
+  background-color: #00CECB;
+  position: relative;
+  border-bottom: 4px solid #003049;
 }
-body .chatlog {
+
+.chatlog {
   background-color: #D8D8D8;
   flex-basis: 80%;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #FF5E5B #003049;
 }
-body li {
+
+li {
   background-color: #FF5E5B;
   margin: 1.5rem;
   padding: 1rem;
   border-radius: 1rem;
   position: relative;
 }
-body form.sendMessage {
+
+form.sendMessage {
   flex-basis: 15%;
   display: flex;
   padding: 2% 0 5%;
   background-color: #003049;
 }
-body input {
+
+input {
   flex-basis: 80%;
   border: none;
   padding: 3rem;
 }
-body button, body .deleteMessage {
+
+button, .deleteMessage {
   flex-basis: 20%;
   background-color: #FFED66;
   border: none;
 }
-body .deleteMessage {
+
+.deleteMessage {
   position: absolute;
   top: 0;
   right: 0;
@@ -332,42 +343,43 @@ body .deleteMessage {
   border-top-left-radius: 0rem;
   border-bottom-right-radius: 0rem;
 }
-body header {
-  position: relative;
-}
+
 @media (max-width: 400px) {
-  body article {
+  article {
     position: relative;
   }
 }
-body .userInfo {
+
+.userInfo {
   letter-spacing: 0.1rem;
   position: relative;
 }
 @media (max-width: 400px) {
-  body .userInfo {
+  .userInfo {
     padding: 1.25rem 0 0.33rem;
     position: static;
   }
 }
-body .time {
+
+.time {
   text-align: right;
   position: absolute;
   right: 0;
 }
 @media (max-width: 400px) {
-  body .time {
+  .time {
     left: 0;
     top: 0;
     right: unset;
     text-align: left;
   }
 }
-body .date {
+
+.date {
   margin-right: 2rem;
 }
 @media (max-width: 450px) {
-  body .date {
+  .date {
     margin-right: 0.5rem;
   }
 }
