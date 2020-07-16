@@ -15,10 +15,27 @@ body {
 header {
     flex-basis: 20.25%;
     text-align: center;
-    padding: 1.5rem 0;
+    padding: 3.85rem 0;
     background-color: $secondaryColor;
     position: relative;
     border-bottom: 4px solid $black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    &::before, &::after {
+        position: absolute;
+    }
+    &::before {
+        content: url(../../../assets/top\-lines.svg);
+        right: -4.9%;
+        top: 12.5%;
+    }
+    &::after {
+        content: url(../../../assets/bottom-lines.svg);
+        bottom: 5%;
+        left: -8.27%;
+    }
 }
 .chatlog {
     background-color: $grey;
@@ -71,7 +88,6 @@ article {
     }
 }
 .userInfo {
-    letter-spacing: .1rem;
     position: relative;
     @media (max-width: 400px) {
         padding: 1.25rem 0 .33rem;

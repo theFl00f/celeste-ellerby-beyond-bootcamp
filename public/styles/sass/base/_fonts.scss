@@ -3,18 +3,20 @@ body, nav a {
     font-family: $bodyFont;
     font-size: 1.5rem;
     text-decoration: none;
+    letter-spacing: 0;
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 5.6rem;
+    text-transform: uppercase;
 }
 
-span, h1, button, nav, nav a {
+span, h1, button, nav, nav a, .userInfo {
     font-family: $accentFont;
 }
 
-span {
-    font-size: 1.1rem;
+.userInfo {
+    font-size: 1.2rem;
 }
 
 button {

@@ -243,21 +243,23 @@ html {
 
 body, nav a {
   color: #003049;
-  font-family: "Roboto Slab", serif;
+  font-family: lieberuth, sans-serif;
   font-size: 1.5rem;
   text-decoration: none;
+  letter-spacing: 0;
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 5.6rem;
+  text-transform: uppercase;
 }
 
-span, h1, button, nav, nav a {
-  font-family: "Bungee Inline", cursive;
+span, h1, button, nav, nav a, .userInfo {
+  font-family: ff-dax-compact-pro, sans-serif;
 }
 
-span {
-  font-size: 1.1rem;
+.userInfo {
+  font-size: 1.2rem;
 }
 
 button {
@@ -287,10 +289,27 @@ body {
 header {
   flex-basis: 20.25%;
   text-align: center;
-  padding: 1.5rem 0;
+  padding: 3.85rem 0;
   background-color: #00CECB;
   position: relative;
   border-bottom: 4px solid #003049;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+header::before, header::after {
+  position: absolute;
+}
+header::before {
+  content: url(../../../assets/top\-lines.svg);
+  right: -4.9%;
+  top: 12.5%;
+}
+header::after {
+  content: url(../../../assets/bottom-lines.svg);
+  bottom: 5%;
+  left: -8.27%;
 }
 
 .chatlog {
@@ -351,7 +370,6 @@ button, .deleteMessage {
 }
 
 .userInfo {
-  letter-spacing: 0.1rem;
   position: relative;
 }
 @media (max-width: 400px) {
