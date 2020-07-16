@@ -3,14 +3,10 @@ https://beyondbootcampchat.herokuapp.com/
 ## Hello! 
 Welcome to my first fullstack app!
 ## How to use this app
-<<<<<<< HEAD
 1. Clone repo.
 1. Install dependencies with "npm install"
 1. To run, use command "npm run start-dev"
 
-=======
-1. instructions to come...
->>>>>>> parent of 223a1b1... added design ref files
 ## A History...
 This app was initially created in vanilla Javascript with no frameworks or dependencies using localStorage! This code is still used for all html and styling.  
 The front end was then combined into an express-generator app, which is where this repo begins! The localStorage code was commented out as it was replaced with MongoDB and socket.io for realtime functions.  
