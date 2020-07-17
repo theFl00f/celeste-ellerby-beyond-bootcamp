@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="517.324" height="880.605" viewBox="0 0 517.324 880.605">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff5e5b;
+        stroke: #003049;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <path id="bg-path" class="cls-1" d="M-3.971,492.822s5.294,112.666,100.59,80.888-8.106-181.657,46.324-239.776,93.33,16.667,123.09,0,25.649-66.734,28.829-188.986S423.537,37.1,423.537,37.1v876.05H-89.34Z" transform="translate(91.787 -34.548)"/>
+</svg>

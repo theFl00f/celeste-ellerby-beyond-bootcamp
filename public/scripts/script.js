@@ -7,7 +7,7 @@ const loginButton = document.querySelector('#login');
 const logoutButton = document.querySelector('#logout');
 const userInfoButton = document.querySelector('#info');
 const welcomeUser = document.querySelector('#welcomeUser');
-const onlineUsers = document.querySelector('#onlineUsers')
+const onlineUsers = document.querySelector('#onlineUsers');
 let currentUser;
 let userId = null;
 let userNickname = 'anonymous';
@@ -17,21 +17,17 @@ const socket = io();
 const socketSendMessage = () => {
     const msg = userMessage.value;
     if (msg) {
-        socket.emit('msg', {message: msg})
+        socket.emit('msg', {message: msg});
     }
-    console.log(msg)
-    printMessages()
+    printMessages();
 }
 
 socket.on('counter', (data) => {
-    onlineUsers.innerHTML = data.onlineUsers
+    onlineUsers.innerHTML = data.onlineUsers;
 })
 
 
-
-
 //listen for new messages
-
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (userMessage.value.length < 1) return;
@@ -41,7 +37,7 @@ form.addEventListener('submit', (e) => {
         userNickname = currentUser.nickname;
     }
     postMessageToDB(userId, userNickname, userMessage.value).then(data => {
-        console.log(data)
+        console.log(data);
     })
     socketSendMessage();
 //     //reset form
@@ -49,41 +45,37 @@ form.addEventListener('submit', (e) => {
 })
 
 
-
-
-
-const savedMessages = localStorage.getItem('messages');
-if (savedMessages) {
-    chatlog.innerHTML = savedMessages;
-}
-
 const getUser = () => {
     fetch('/api/data/users')
         .then((data) => data.json())
         .then(json => {
-            printUserData(json)
+            printUserData(json);
+            logoutButton.classList.remove('hidden');
+            loginButton.classList.add('hidden');
+            welcomeUser.classList.add('hidden')
+            //execute 'logged out' state for news section
         }).catch(err => {
-            console.log(err)
+            console.log(err);
             userId = null;
-            userNickname = 'anonymous'
+            userNickname = 'anonymous';
+            logoutButton.classList.add('hidden');
+            loginButton.classList.remove('hidden');
+            welcomeUser.classList.add('hidden')
+            //execute 'logged out' state for news section
         })
 }
 
-getUser()
 
 
 const printUserData = (user) => {
-    
     if (!welcomeUser.hasChildNodes()) {
-        const { id, userProfile } = user
+        const { id, userProfile } = user;
         currentUser = userProfile;
-        console.log(user)
-        console.log(id, userProfile.nickname)
-        const htmlToAppend = `welcome, ${userProfile.nickname}`
-        const newUser = document.createElement('p')
+        const htmlToAppend = `welcome, <span>${userProfile.nickname}</span>`;
+        const newUser = document.createElement('p');
         newUser.setAttribute('id', `${id}`);
-        newUser.innerHTML = htmlToAppend
-        welcomeUser.append(newUser)
+        newUser.innerHTML = htmlToAppend;
+        welcomeUser.append(newUser);
     }
 }
 
@@ -107,10 +99,10 @@ const postMessageToDB = async (id, nickname, message) => {
 const getMessages = () => {
     return fetch('/api/data/messages')
         .then(data => {
-            return data.json()
+            return data.json();
         })
         .then(json => {
-        return json
+        return json;
     })
 }
 
@@ -118,14 +110,12 @@ const printMessages = () => {
     getMessages()
         .then(res => {
         chatlog.innerHTML = '';
-        console.log(res)
         res.forEach(message => {
-            const { _id, body, created_at, user } = message
-            //create new li element
+            const { _id, body, created_at, user } = message;
             const newMessage = document.createElement('li');
             const newDate = new Date(created_at);
-            const dateString = newDate.toString().slice(0, 15)
-            const timeArray = newDate.toString().slice(16, -33).split(':')
+            const dateString = newDate.toString().slice(0, 15);
+            const timeArray = newDate.toString().slice(16, -33).split(':');
             const hours = parseInt(timeArray[0]);
             let amPm;
             if (hours >= 12) {
@@ -133,12 +123,8 @@ const printMessages = () => {
             } else {
                 amPm = 'am'
             }
-            // console.log(hours)
             const formattedTime = `${timeArray[0]}:${timeArray[1]}`
-            //change html of li element
-            //only add button if p.userinfo id is equal to null or is not equal to the div.welcomeUser child's id
             if (user.id !== null && currentUser && user.id == currentUser.id) {
-                //matches
                 newMessage.innerHTML =  `
                 <article class="userMessage">
                     <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</button>
@@ -198,8 +184,8 @@ const printMessages = () => {
 }
 
 socket.on('newmsg', msg => {
-    console.log('socket listener', msg)
     printMessages()
 })
 
 printMessages();
+getUser()
