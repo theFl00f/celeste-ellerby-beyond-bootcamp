@@ -129,30 +129,26 @@ const printMessages = () => {
                 <article class="userMessage">
                     <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</button>
                     <p class="userInfo" id="${user.id}">${user.nickname}
-                        <span class="time">
-                            <span class="date">${dateString} </span>
-                            ${formattedTime}
-                        </span>
+                    <span class="date">${dateString} </span>
                     </p>
                     <p class="messageContents">
                         ${body}
                     </p>
                 </article>
+                <span class="time">${formattedTime}</span>
                 `
             } else {
                 //does not match
                 newMessage.innerHTML =  `
                 <article class="userMessage">
                     <p class="userInfo" id="${user.id}">${user.nickname}
-                        <span class="time">
-                            <span class="date">${dateString} </span>
-                            ${formattedTime}
-                        </span>
+                    <span class="date">${dateString} </span>
                     </p>
                     <p class="messageContents">
                         ${body}
                     </p>
                 </article>
+                <span class="time">${formattedTime}</span>
                 `
             }
             chatlog.appendChild(newMessage);
