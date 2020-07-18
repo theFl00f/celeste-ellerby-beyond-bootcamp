@@ -27,6 +27,8 @@ socket.on('counter', (data) => {
 })
 
 
+
+
 //listen for new messages
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -128,9 +130,10 @@ const printMessages = () => {
                 newMessage.innerHTML =  `
                 <article class="userMessage">
                     <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</button>
-                    <p class="userInfo" id="${user.id}">${user.nickname}
-                    <span class="date">${dateString} </span>
-                    </p>
+                    <div class="messageHeader">
+                        <p class="userInfo" id="${user.id}">${user.nickname}</p>
+                        <p class="date">${dateString} </p>
+                    </div>
                     <p class="messageContents">
                         ${body}
                     </p>
@@ -141,9 +144,11 @@ const printMessages = () => {
                 //does not match
                 newMessage.innerHTML =  `
                 <article class="userMessage">
-                    <p class="userInfo" id="${user.id}">${user.nickname}
-                    <span class="date">${dateString} </span>
-                    </p>
+                    <div class="messageHeader">
+                        <p class="userInfo" id="${user.id}">${user.nickname}
+                        </p>
+                        <p class="date">${dateString} </p>
+                    </div>
                     <p class="messageContents">
                         ${body}
                     </p>
@@ -152,14 +157,36 @@ const printMessages = () => {
                 `
             }
             chatlog.appendChild(newMessage);
+
+
+        })
+    })
+    .then(() => {
+            const lists = document.querySelectorAll('li');  
+            lists.forEach(list => {
+                list.addEventListener('click', function(e) {
+                    e.preventDefault()
+                    lists.forEach(list => {
+                        list.classList.remove('selected')
+                    })
+                    this.classList.add('selected')
+                    if (this == document.querySelector('li:last-of-type')) {
+                        chatlog.scrollTo({
+                            top: chatlog.scrollHeight,
+                            left: 0,
+                            behavior: 'auto'
+                        })
+                    }
+                })
+            })
+
+            document.querySelector('li:last-of-type').classList.add('selected')
+
             chatlog.scrollTo({
                 top: chatlog.scrollHeight,
                 left: 0,
                 behavior: 'auto'
             })
-        })
-    })
-    .then(() => {
             // delete message
             const messageArray = [...document.getElementsByClassName('deleteMessage')];
             messageArray.forEach(message => {

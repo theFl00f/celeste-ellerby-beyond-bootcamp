@@ -259,12 +259,16 @@ h1 {
   text-transform: uppercase;
 }
 
-span, h1, .userInfo {
+span, h1, .userInfo, .date {
   font-family: ff-dax-compact-pro, sans-serif;
 }
 
-.userInfo {
+.userInfo, .time, .date {
   font-size: 1.2rem;
+}
+
+.userInfo {
+  text-transform: capitalize;
 }
 
 button {
@@ -378,16 +382,34 @@ main::after {
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #FF5E5B #003049;
+  border-radius: 0 0 0.75rem 0.75rem;
 }
 
 li {
   background-color: #FF5E5B;
-  margin: 1.5rem;
+  margin: 0 1.1rem 1rem;
   padding: 1rem;
   border-radius: 1.5rem;
   position: relative;
   border: 4px solid #003049;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+li .time {
+  transform: translateX(-20%);
+  opacity: 0;
+  transition: all 0.45s ease-out;
+}
+li.selected {
+  margin: 0 1.1rem 3rem;
+  filter: brightness(85%);
+}
+li.selected:last-of-type {
+  margin-bottom: 3.5rem;
+}
+li.selected .time {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 form.sendMessage {
@@ -438,27 +460,11 @@ button, .deleteMessage {
   }
 }
 
-.userInfo {
-  position: relative;
-}
-@media (max-width: 400px) {
-  .userInfo {
-    padding: 1.25rem 0 0.33rem;
-    position: static;
-  }
-}
-
 .time {
   text-align: right;
-  right: 0;
-}
-@media (max-width: 400px) {
-  .time {
-    left: 0;
-    top: 0;
-    right: unset;
-    text-align: left;
-  }
+  position: absolute;
+  bottom: -2rem;
+  left: 8%;
 }
 
 .date {
@@ -544,4 +550,10 @@ nav {
 
 .onlineUsers {
   margin-left: 0.5rem;
+}
+
+.messageHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 96%;
 }

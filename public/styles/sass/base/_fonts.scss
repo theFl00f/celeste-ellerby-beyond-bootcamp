@@ -11,12 +11,16 @@ h1 {
     text-transform: uppercase;
 }
 
-span, h1, .userInfo {
+span, h1, .userInfo, .date {
     font-family: $accentFont;
 }
 
-.userInfo {
+.userInfo, .time, .date {
     font-size: 1.2rem;
+}
+
+.userInfo {
+    text-transform: capitalize;
 }
 
 button {

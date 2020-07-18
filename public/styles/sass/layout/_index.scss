@@ -85,16 +85,35 @@ main {
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: $primaryColor $black;
+    border-radius: 0 0 .75rem .75rem;
 }
 li {
     background-color: $primaryColor;
-    margin: 1.5rem;
+    margin: 0 1.1rem 1rem;
     padding: 1rem;
     border-radius: 1.5rem;
     position: relative;
     border: 4px solid $black;
     cursor: pointer;
+    transition: all .25s ease;
+    .time {
+        transform: translateX(-20%);
+        opacity: 0;
+        transition: all .45s ease-out;
+    }    
+    &.selected {
+        margin: 0 1.1rem 3rem;
+        filter: brightness(85%);
+        &:last-of-type {
+            margin-bottom: 3.5rem;
+        }
+        .time {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
 }
+
 form.sendMessage {
     display: flex;
     margin: 4%;
@@ -138,23 +157,11 @@ article {
         position: relative;
     }
 }
-.userInfo {
-    position: relative;
-    @media (max-width: 400px) {
-        padding: 1.25rem 0 .33rem;
-        position: static;
-    }
-}
 .time {
     text-align: right;
-    // position: absolute;
-    right: 0;
-    @media (max-width: 400px) {
-        left: 0;
-        top: 0;
-        right: unset;
-        text-align: left;
-    }
+    position: absolute;
+    bottom: -2rem;
+    left: 8%;
 }
 .date {
     margin-right: 2rem;
@@ -236,4 +243,10 @@ nav {
 }
  .onlineUsers {
      margin-left: .5rem;
+ }
+
+ .messageHeader {
+     display: flex;
+     justify-content: space-between;
+     width: 96%;
  }
