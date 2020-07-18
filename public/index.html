@@ -4,32 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Roboto+Slab&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://use.typekit.net/lui6lng.css">
+    <script src="https://kit.fontawesome.com/8e2ca6e025.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="./styles/style.css" as="style">
+    <link rel="preload" href="./scripts/script.js" as="script">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
+    <header>
+        <h1>Let's Chat!</h1>
+    </header>
     <div class="wrapper">
-        <header>
-            <h1>Let's Chat!</h1>
+        <div class="news">
             <nav class="NavButtons">
-                <div>Online: <span id="onlineUsers"></span></div>
-                <a href="/logout" id="logout">
-                    <div class="navButton">Log out</div>
+                <div>Online:<span id="onlineUsers" class="onlineUsers"></span></div>
+                <div id="welcomeUser" class="hidden"></div>
+                <a href="/logout" id="logout" class="hidden">
+                    <p class="navButton">Log out</p>
                 </a>
                 <a href="/login" id="login">
-                    <div class="navButton">Log in</div>
+                    <p class="navButton">Log in</p>
                 </a>
-                <div id="welcomeUser"></div>
             </nav>
-        </header>
-        <ul id="chatlog" class="chatlog">
-    
-        </ul>
-        <form action="/api/data/messages" id="sendMessage" class="sendMessage" method="POST">
-            <label for="message" class="sr-only">type your message here:</label>
-            <input type="text" name="message" id="message">
-            <button type="submit">send</button>
-        </form>
+        </div>
+        <main>
+            <ul id="chatlog" class="chatlog">
+        
+            </ul>
+            <form action="/api/data/messages" id="sendMessage" class="sendMessage" method="POST">
+                <label for="message" class="sr-only">type your message here:</label>
+                <input type="text" name="message" id="message">
+                <button type="submit"><i class="fas fa-paper-plane" aria-hidden="true" title="Send"></i>
+                <span class="sr-only">Send</span></button>
+            </form>
+        </main>
     </div>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 </body>

@@ -1,26 +1,44 @@
-body, nav a {
+body {
     color: $black;
     font-family: $bodyFont;
     font-size: 1.5rem;
     text-decoration: none;
+    letter-spacing: 0;
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 5.6rem;
+    text-transform: uppercase;
 }
 
-span, h1, button, nav, nav a {
+span, h1, .userInfo, .date {
     font-family: $accentFont;
 }
 
-span {
-    font-size: 1.1rem;
+.userInfo, .time, .date {
+    font-size: 1.2rem;
+}
+
+.userInfo {
+    text-transform: capitalize;
 }
 
 button {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
+    &:hover {
+        color: $primaryColor;
+    }
 }
 
 .deleteMessage {
     font-size: 1.6rem;
+}
+
+.news {
+    font-family: $accentFont;
+    text-transform: uppercase;
+    font-size: 2.0rem;
+    span {
+        font-family: $accentFont;
+    }
 }
