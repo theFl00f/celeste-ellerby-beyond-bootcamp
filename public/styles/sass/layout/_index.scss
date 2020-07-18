@@ -97,7 +97,6 @@ li {
     border-radius: 1.5rem;
     position: relative;
     border: 4px solid $black;
-    cursor: pointer;
     transition: all .25s ease;
     .time {
         transform: translateX(-20%);
@@ -114,6 +113,9 @@ li {
             transform: translateX(0);
             opacity: 1;
         }
+    }
+    &:hover {
+        filter: brightness(85%);
     }
 }
 
@@ -142,8 +144,8 @@ button, .deleteMessage {
 }
 .deleteMessage {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -4px;
+    right: -4px;
     max-height: 2.5rem;
     min-height: 2.5rem;
     max-width: 2.5rem;
@@ -151,14 +153,19 @@ button, .deleteMessage {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: .5rem;
-    border-top-left-radius: 0rem;
-    border-bottom-right-radius: 0rem;
-}
-article {
-    @media (max-width: 400px) {
-        position: relative;
+    border-radius: 0;
+    border-bottom-left-radius: 37.5%;
+    color: $black;
+    padding: 2%;
+    transform: translateY(0);
+    text-shadow: 0 0 0 $black;
+    &:hover {
+        i {
+            text-shadow: 0 0.75px 0 $black;
+            transform: translateY(-0.75px);
+        }
     }
+    transition: all .25s ease;
 }
 .time {
     text-align: right;
@@ -181,6 +188,51 @@ article {
     position: relative;
     overflow: hidden;
     border-radius: 1.25rem;
+    &.logged-in {
+        overflow: unset;
+        &::before, &::after {
+            content: none;
+        }
+        div {
+            background: repeating-linear-gradient(120deg, #225772 -15% 20%, #336782 20% 55%);
+            &:last-of-type {
+                background: repeating-linear-gradient(120deg, #B3ADAD -10% 20%, #9F9696 20% 50%);
+            }
+        }
+        div, a {
+            border-radius: 1rem;
+            border: 4px outset $black;
+            margin: 0 2%;
+            &::after {
+                content: none;
+            }
+            &:first-child {
+                margin-left: unset;
+            }
+        }
+        a {
+            background: repeating-linear-gradient(120deg, #00CECB -10% 15%, #06B3B3 15% 40%);
+            margin-right: unset;
+            transform: translate(0,0);
+            box-shadow: 0 0 0 $accentColor;
+            transition: all .5s ease;
+            &:hover {
+                box-shadow: 4px 3px 0 $accentColor;
+                transform: translate(-4px, -3px);
+            }
+        }
+        nav {
+            height: 100%;
+            padding: unset;
+        }
+        div, div p {
+            display: flex;
+            flex-direction: column;
+        }
+        span {
+            margin: .5rem 0;
+        }
+    }
     &::before, &::after {
         content: '';
         background-color: $white;

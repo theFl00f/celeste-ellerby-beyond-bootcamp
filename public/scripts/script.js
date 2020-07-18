@@ -8,6 +8,7 @@ const logoutButton = document.querySelector('#logout');
 const userInfoButton = document.querySelector('#info');
 const welcomeUser = document.querySelector('#welcomeUser');
 const onlineUsers = document.querySelector('#onlineUsers');
+const newsSection = document.querySelector('.news')
 let currentUser;
 let userId = null;
 let userNickname = 'anonymous';
@@ -52,18 +53,22 @@ const getUser = () => {
         .then((data) => data.json())
         .then(json => {
             printUserData(json);
+            //execute 'logged in' state for news section
             logoutButton.classList.remove('hidden');
             loginButton.classList.add('hidden');
-            welcomeUser.classList.add('hidden')
-            //execute 'logged out' state for news section
+            welcomeUser.classList.remove('hidden');
+            newsSection.classList.add('logged-in');
+            newsSection.classList.remove('hidden');
+
         }).catch(err => {
             console.log(err);
             userId = null;
             userNickname = 'anonymous';
+            //execute 'logged out' state for news section, which is default
             logoutButton.classList.add('hidden');
             loginButton.classList.remove('hidden');
-            welcomeUser.classList.add('hidden')
-            //execute 'logged out' state for news section
+            welcomeUser.classList.add('hidden');
+            newsSection.classList.remove('logged-in', 'hidden');
         })
 }
 
@@ -73,7 +78,7 @@ const printUserData = (user) => {
     if (!welcomeUser.hasChildNodes()) {
         const { id, userProfile } = user;
         currentUser = userProfile;
-        const htmlToAppend = `welcome, <span>${userProfile.nickname}</span>`;
+        const htmlToAppend = `welcome, <span>${userProfile.nickname}!</span>`;
         const newUser = document.createElement('p');
         newUser.setAttribute('id', `${id}`);
         newUser.innerHTML = htmlToAppend;
@@ -129,7 +134,9 @@ const printMessages = () => {
             if (user.id !== null && currentUser && user.id == currentUser.id) {
                 newMessage.innerHTML =  `
                 <article class="userMessage">
-                    <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage">x</button>
+                    <button href="/api/data/messages/${_id}" id="${_id}" class="deleteMessage" aria-label="Delete">
+                        <i class="fas fa-times-circle" aria-hidden="true" title="Delete this item?"></i>
+                    </button>
                     <div class="messageHeader">
                         <p class="userInfo" id="${user.id}">${user.nickname}</p>
                         <p class="date">${dateString} </p>
