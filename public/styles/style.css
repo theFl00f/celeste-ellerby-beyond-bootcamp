@@ -279,13 +279,24 @@ button:hover {
 }
 
 .deleteMessage {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
 }
 
 .news {
   font-family: ff-dax-compact-pro, sans-serif;
   text-transform: uppercase;
   font-size: 2rem;
+  text-align: center;
+}
+.news.logged-in div {
+  font-family: lieberuth, sans-serif;
+  text-transform: capitalize;
+  color: white;
+  font-size: 1.1rem;
+}
+.news.logged-in span, .news.logged-in a {
+  color: #FFED66;
+  font-size: 2.4rem;
 }
 .news span {
   font-family: ff-dax-compact-pro, sans-serif;
@@ -395,7 +406,6 @@ li {
   border-radius: 1.5rem;
   position: relative;
   border: 4px solid #003049;
-  cursor: pointer;
   transition: all 0.25s ease;
 }
 li .time {
@@ -413,6 +423,9 @@ li.selected:last-of-type {
 li.selected .time {
   transform: translateX(0);
   opacity: 1;
+}
+li:hover {
+  filter: brightness(85%);
 }
 
 form.sendMessage {
@@ -443,8 +456,8 @@ button, .deleteMessage {
 
 .deleteMessage {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -4px;
+  right: -4px;
   max-height: 2.5rem;
   min-height: 2.5rem;
   max-width: 2.5rem;
@@ -452,15 +465,17 @@ button, .deleteMessage {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.5rem;
-  border-top-left-radius: 0rem;
-  border-bottom-right-radius: 0rem;
+  border-radius: 0;
+  border-bottom-left-radius: 37.5%;
+  color: #003049;
+  padding: 2%;
+  transform: translateY(0);
+  text-shadow: 0 0 0 #003049;
+  transition: all 0.25s ease;
 }
-
-@media (max-width: 400px) {
-  article {
-    position: relative;
-  }
+.deleteMessage:hover i {
+  text-shadow: 0 0.75px 0 #003049;
+  transform: translateY(-0.75px);
 }
 
 .time {
@@ -488,6 +503,51 @@ button, .deleteMessage {
   position: relative;
   overflow: hidden;
   border-radius: 1.25rem;
+}
+.news.logged-in {
+  overflow: unset;
+}
+.news.logged-in::before, .news.logged-in::after {
+  content: none;
+}
+.news.logged-in div {
+  background: repeating-linear-gradient(120deg, #225772 -15% 20%, #336782 20% 55%);
+}
+.news.logged-in div:last-of-type {
+  background: repeating-linear-gradient(120deg, #B3ADAD -10% 20%, #9F9696 20% 50%);
+}
+.news.logged-in div, .news.logged-in a {
+  border-radius: 1rem;
+  border: 4px outset #003049;
+  margin: 0 2%;
+}
+.news.logged-in div::after, .news.logged-in a::after {
+  content: none;
+}
+.news.logged-in div:first-child, .news.logged-in a:first-child {
+  margin-left: unset;
+}
+.news.logged-in a {
+  background: repeating-linear-gradient(120deg, #00CECB -10% 15%, #06B3B3 15% 40%);
+  margin-right: unset;
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 #FFED66;
+  transition: all 0.5s ease;
+}
+.news.logged-in a:hover {
+  box-shadow: 4px 3px 0 #FFED66;
+  transform: translate(-4px, -3px);
+}
+.news.logged-in nav {
+  height: 100%;
+  padding: unset;
+}
+.news.logged-in div, .news.logged-in div p {
+  display: flex;
+  flex-direction: column;
+}
+.news.logged-in span {
+  margin: 0.5rem 0;
 }
 .news::before, .news::after {
   content: "";
