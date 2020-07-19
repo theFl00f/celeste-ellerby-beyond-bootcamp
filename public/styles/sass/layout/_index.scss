@@ -1,14 +1,17 @@
+:focus {
+    border: 2px solid red;
+}
 body {
     background-color: $white;
+
     height: 100vh;
     padding-bottom: 4.875rem;
     display: flex;
     flex-direction: column;
-    position: relative;
     overflow: hidden;
     background: url(../../../assets/bg-path.svg) fixed 67% -5% no-repeat $white;
     background-size: 138% 110%;
-    position: relative;
+    position: fixed;
     &::after {
         content: url(../../../assets/circle.svg#circle);
         position: absolute;
@@ -216,7 +219,7 @@ button, .deleteMessage {
             transform: translate(0,0);
             box-shadow: 0 0 0 $accentColor;
             transition: all .5s ease;
-            &:hover {
+            &:hover, &:focus-within {
                 box-shadow: 4px 3px 0 $accentColor;
                 transform: translate(-4px, -3px);
             }
@@ -275,7 +278,13 @@ button, .deleteMessage {
     }
     a {
         background: repeating-linear-gradient(51deg, #FFE167 -10% 20%, #FFED66 20% 50%);
-
+        transform: translate(0,0);
+        box-shadow: 0 0 0 $accentColor;
+        transition: all .5s ease;
+        &:hover, &:focus-within {
+            box-shadow: 4px 3px 0 $primaryColor;
+            transform: translate(-4px, -3px);
+        }
     }
 }
 

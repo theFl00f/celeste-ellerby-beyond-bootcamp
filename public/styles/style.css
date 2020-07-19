@@ -302,17 +302,20 @@ button:hover {
   font-family: ff-dax-compact-pro, sans-serif;
 }
 
+:focus {
+  border: 2px solid red;
+}
+
 body {
   background-color: #FFFFEA;
   height: 100vh;
   padding-bottom: 4.875rem;
   display: flex;
   flex-direction: column;
-  position: relative;
   overflow: hidden;
   background: url(../../../assets/bg-path.svg) fixed 67% -5% no-repeat #FFFFEA;
   background-size: 138% 110%;
-  position: relative;
+  position: fixed;
 }
 body::after {
   content: url(../../../assets/circle.svg#circle);
@@ -534,7 +537,7 @@ button, .deleteMessage {
   box-shadow: 0 0 0 #FFED66;
   transition: all 0.5s ease;
 }
-.news.logged-in a:hover {
+.news.logged-in a:hover, .news.logged-in a:focus-within {
   box-shadow: 4px 3px 0 #FFED66;
   transform: translate(-4px, -3px);
 }
@@ -591,6 +594,13 @@ button, .deleteMessage {
 }
 .news a {
   background: repeating-linear-gradient(51deg, #FFE167 -10% 20%, #FFED66 20% 50%);
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 #FFED66;
+  transition: all 0.5s ease;
+}
+.news a:hover, .news a:focus-within {
+  box-shadow: 4px 3px 0 #FF5E5B;
+  transform: translate(-4px, -3px);
 }
 
 nav {

@@ -9,6 +9,7 @@ const userInfoButton = document.querySelector('#info');
 const welcomeUser = document.querySelector('#welcomeUser');
 const onlineUsers = document.querySelector('#onlineUsers');
 const newsSection = document.querySelector('.news')
+const eventList = ['click', 'tap']
 let currentUser;
 let userId = null;
 let userNickname = 'anonymous';
@@ -171,20 +172,22 @@ const printMessages = () => {
     .then(() => {
             const lists = document.querySelectorAll('li');  
             lists.forEach(list => {
-                list.addEventListener('click', function(e) {
-                    e.preventDefault()
-                    lists.forEach(list => {
-                        list.classList.remove('selected')
-                    })
-                    this.classList.add('selected')
-                    if (this == document.querySelector('li:last-of-type')) {
-                        chatlog.scrollTo({
-                            top: chatlog.scrollHeight,
-                            left: 0,
-                            behavior: 'auto'
+                for (const event of eventList) {                    
+                    list.addEventListener(event, function(e) {
+                        e.preventDefault()
+                        lists.forEach(list => {
+                            list.classList.remove('selected')
                         })
-                    }
-                })
+                        this.classList.add('selected')
+                        if (this == document.querySelector('li:last-of-type')) {
+                            chatlog.scrollTo({
+                                top: chatlog.scrollHeight,
+                                left: 0,
+                                behavior: 'auto'
+                            })
+                        }
+                    })
+                }
             })
 
             document.querySelector('li:last-of-type').classList.add('selected')
@@ -197,16 +200,18 @@ const printMessages = () => {
             // delete message
             const messageArray = [...document.getElementsByClassName('deleteMessage')];
             messageArray.forEach(message => {
-                message.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    fetch(`/api/data/messages/${this.id}`, {
-                        method: 'DELETE'
+                for (const event of eventList) {                    
+                    message.addEventListener(event, function (e) {
+                        e.preventDefault();
+                        fetch(`/api/data/messages/${this.id}`, {
+                            method: 'DELETE'
+                        })
+                        .then(res => res.json())
+                        .then(() => {
+                            printMessages();
+                        })
                     })
-                    .then(res => res.json())
-                    .then(() => {
-                        printMessages();
-                    })
-                })
+                }
             })
 
 
