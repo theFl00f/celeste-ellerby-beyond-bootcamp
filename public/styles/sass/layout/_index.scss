@@ -12,6 +12,7 @@ body {
     background: url(../../../assets/bg-path.svg) fixed 67% -5% no-repeat $white;
     background-size: 138% 110%;
     position: fixed;
+    width: 100%;
     &::after {
         content: url(../../../assets/circle.svg#circle);
         position: absolute;

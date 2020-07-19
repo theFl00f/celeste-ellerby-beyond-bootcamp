@@ -316,6 +316,7 @@ body {
   background: url(../../../assets/bg-path.svg) fixed 67% -5% no-repeat #FFFFEA;
   background-size: 138% 110%;
   position: fixed;
+  width: 100%;
 }
 body::after {
   content: url(../../../assets/circle.svg#circle);
